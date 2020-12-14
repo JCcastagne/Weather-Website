@@ -1,0 +1,309 @@
+/*
+
+OpenWeather | Created by J-C Castagne @ GitHub: https://github.com/JCcastagne
+
+*/
+
+@-moz-viewport { width: device-width; scale: 1; }
+@-ms-viewport { width: device-width; scale: 1; }
+@-o-viewport { width: device-width; scale: 1; }
+@-webkit-viewport { width: device-width; scale: 1; }
+@viewport { width: device-width; scale: 1; }
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
+
+html {
+  box-sizing: border-box;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  background: var(--white5);
+  background: linear-gradient(170deg, var(--white4) 0%, var(--white5) 100%);
+  color: var(--jetBlack);
+}
+
+:root {
+
+  /*gradients*/
+  --jetBlack: rgb(33, 33, 33);
+  --white1: rgb(255,255,255);
+  --white2: rgb(246,246,246);
+  --white3: rgb(236,236,236);
+  --white4: rgb(225,225,225);
+  --white5: rgb(208, 208, 208);
+  --white6: rgb(145, 145, 145);
+
+  /*accents*/
+  --darkBlue: #002447;
+  --blue: #53D3D1;
+  --orange: #FEB249;
+
+  /*font sizes*/
+  --seven: 3.652em;
+  --six: 3.052em;
+  --five: 2.441em;
+  --four: 1.953em;
+  --three: 1.563em;
+  --two: 1.25em;
+  --oneh: 1.125em
+  --one: 1em;
+  --minusOne: 0.8em;
+  --minusTwo: 0.64em;
+  --minusThree: 0.512em;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  width: 80vw;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/** header**/
+
+header{
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+}
+
+h1{
+  font-size: var(--six);
+}
+
+header h1:nth-child(1){
+  font-weight: 100;
+  letter-spacing: 0.125em;
+}
+
+header h1:nth-child(2){
+  background: linear-gradient(170deg, var(--blue) 0%, var(--white6) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.location{
+  display: flex;
+  justify-content: center;
+  font-size: var(--one);
+  margin: 1em 0 3em;
+}
+
+.location .currentLocation,
+.location .refresh{
+  justify-content: center;
+  padding: 1em 1.5em;
+  border-radius: 12.5px;
+  
+}
+
+.location .currentLocation{
+  display: flex;
+  margin-right: 1em;
+  box-shadow: inset 8px 8px 16px 0 rgba(0, 0, 0, 0.2), inset -8px -8px 16px 0 rgba(255, 255, 255, 0.4);
+}
+
+.location .refresh{
+  display: flex;
+  flex-direction: row;
+  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25), -8px -8px 12px 0 rgba(255, 255, 255, 0.25);
+
+  transition: all 0.3s ease-in-out;
+}
+.location .refresh:hover{
+  background: none;
+  box-shadow: inset 8px 8px 16px 0 rgba(0, 0, 0, 0.2), inset -8px -8px 16px 0 rgba(255, 255, 255, 0.4);
+}
+
+.location .currentLocation img{
+  height: 1.25em;
+  transform: rotate(90deg);
+  margin-right: 0.5em;
+}
+
+.location .refresh img{
+  height: 1.5em;
+  transform: translateY(-0px);
+  margin-left: 0.5em;
+}
+
+.location::after{
+  position: absolute;
+  transform: translateY(4.8em);
+  content: " ";
+  border-radius: 12.5px;
+  width: 80%;
+  height: 7.5px;
+  background: rgb(0,36,71);
+  background: linear-gradient(90deg, rgba(0,36,71,1) 0%, rgba(83,211,209,1) 20%, rgba(254,178,73,1) 40%, rgba(83,211,209,1) 60%, rgba(0,36,71,1) 80%, rgba(254,178,73,1) 100%);
+  box-shadow: inset 8px 8px 16px 0 rgba(0, 0, 0, 0.2), inset -8px -8px 16px 0 rgba(255, 255, 255, 0.4);
+}
+
+/** header^**/
+
+/** weather **/
+
+main{
+  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-areas: "weather" "temperature" "stats";
+  font-size: 1.2em;
+}
+
+.weather, .temperature, .stats{
+  display: flex;
+  flex-direction: column;
+  border-radius: 12.5px;
+  background: linear-gradient(-45deg, rgba(0,0,0,0.22), rgba(255,255,255,0.25));
+  box-shadow: 
+    12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+    -8px -8px 12px 0 rgba(255, 255, 255, 0.25);
+  padding: 1em;
+}
+
+.weather{
+  grid-area: "weather";
+  margin-right: 1em;
+}
+
+.temperature{
+  grid-area: "temperature";
+  margin: 0 1em;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.stats{
+  grid-area: "stats";
+  margin-left: 1em;
+}
+
+.temperature img{
+  display: block;
+  background: var(--white5);
+  background: linear-gradient(170deg, var(--white4) 0%, var(--white5) 100%);
+  border-radius: 5%;
+  box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.2), -8px -8px 16px 0 rgba(255, 255, 255, 0.4);
+}
+
+.weather h3,
+.stats h3{
+  font-size: var(--three);
+  padding: 0.4em 0 0.25em;
+  text-align: center;
+}
+
+.temperature h2{
+  font-size: var(--five);
+  margin-bottom: 0.5em;
+}
+
+.weather h3,
+.temperature h2,
+.stats h3{
+  text-shadow: 6px 6px 8px rgba(0, 0, 0, 0.15),
+  -4px -4px 6px rgba(255, 255, 255, 0.15);
+  background: linear-gradient(170deg, rgb(103, 103, 103) 0%, var(--jetBlack) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tempTop{
+  display: flex;
+  flex-wrap: wrap;
+  font-weight: 300;
+}
+
+.tempTop p:nth-child(2){
+  margin-top: 0.5em;
+  font-size: var(--four);
+  margin-right: 0.5em;
+}
+
+.tempTop p:nth-child(3){
+  margin-top: 1.45em;
+  font-size: var(--two);
+}
+
+.tempBot{
+  margin-bottom: 0.5em;
+  font-weight: 200;
+  font-size: var(--two);
+}
+
+.container p{
+  padding: 0.25em 0;
+}
+
+.weather::after, .stats::after{
+  content: "";
+  background-color: var(--blue);
+  height: 5px;
+  width: 100%;
+  border-radius: 12.5px;
+  box-shadow: 
+    6px 6px 8px 0 rgba(0, 0, 0, 0.25),
+    -4px -4px 6px 0 rgba(255, 255, 255, 0.25);
+}
+
+
+
+/** weather^**/
+
+/** footer **/
+
+footer{
+
+  margin-top: 17em;/*delete this*/
+
+  text-align: center;
+  font-size: var(--one);
+  display: flex;
+  justify-content: space-between;
+  padding: 1em 0;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+footer a{
+  color: black;
+  transition: all 0.15s ease-in-out;
+}
+
+footer a:visited,
+footer a:active,
+footer a{
+  text-decoration: none;
+  color: var(--jetBlack);
+  font-weight: 600;
+}
+
+footer a:focus,
+footer a:hover{
+  color: var(--blue);
+}
+
+.credits p:nth-child(1){
+  border-left: solid 2px var(--white4);
+}
+.credits p:nth-child(2){
+  padding-left: 0.6em;
+  border-left: solid 2px var(--white4);
+}
+
+footer>p{
+  line-height: 2.25em;
+  padding-right: 0.5em;
+  border-right: solid 2px var(--white4);
+}
+
+
+/** footer^**/
