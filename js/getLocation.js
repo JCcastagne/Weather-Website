@@ -46,16 +46,22 @@ function reportPosition(position){
       let weatherHTML='';
       let weather = document.querySelector('.weather');
       weather.innerHTML = '';
+
+      //turn timestamps to hours:
+      let sunriseObject = new Date((data.current.sunrise)*1000);
+      let sunsetObject = new Date((data.current.sunset)*1000);
+
       weatherHTML = weatherHTML.concat(`
         <h3>Conditions</h3>
         <div class="container">
-        <p>Sunrise: ${data.current.sunrise}</p>
-        <p>Sunset: ${data.current.sunset}</p>
+        <p>Sunrise: ${sunriseObject.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}</p>
+        <p>Sunset: ${sunsetObject.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}</p>
         <p>Wind speed: ${data.current['wind_speed']}km/h</p>
         <p>Wind direction: ${data.current['wind_deg']}&#176;</p>
         <p>Cloud cover: ${data.current.clouds}&#37;</p>
         </div>
       `);
+
 
       // section.temperature
       let temperatureHTML='';
@@ -65,7 +71,7 @@ function reportPosition(position){
         <h2>Weather</h2>
         <div class="container">
         <div class="tempTop">
-          <img src="../img/weatherIcons/SVG/${data.current.weather[0]['icon']}.svg" alt="weather icon">
+          <img src="./../img/weatherIcons/SVG/${data.current.weather[0]['icon']}.svg" alt="weather icon">
           <p>${data.current.temp}&#176;C</p>
           <p>feels like ${data.current['feels_like']}&#176;C</p>
         </div>
@@ -76,6 +82,7 @@ function reportPosition(position){
         </div>
         </div>
       `);
+
 
       // section.stats
       let statsHTML='';
@@ -97,7 +104,14 @@ function reportPosition(position){
       weather.innerHTML = weatherHTML;
       temperature.innerHTML = temperatureHTML;
       stats.innerHTML = statsHTML;
-  
+
+      //done loading animation
+      document.querySelector('#loaderIcon').classList.remove('active');
+
+      let mainWeather = document.querySelector('#mainWeather');
+      mainWeather.classList.add('loaded');
+
+      
     })
     .catch((err)=> {
       //err is the Error object
