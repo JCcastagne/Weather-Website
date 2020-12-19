@@ -4,8 +4,8 @@ document.body.addEventListener("click", getLocation);
 function getLocation(){
   if(navigator.geolocation){ 
     //find position
-    let to = 1000 * 30;  //1000 times 30 = 30 seconds
-    let max = 1000 * 30 * 30;  //1000 * 30 * 30 = 1 hour
+    let to = 1000 * 30;  //1000 * 30 = 30sec
+    let max = 1000 * 30 * 30;  //1000 * 30 * 30 = 1hr
     var params = {enableHighAccuracy: false, timeout:to, maximumAge:max};
     navigator.geolocation.getCurrentPosition( reportPosition, gpsError, params );
   }else{
@@ -15,18 +15,24 @@ function getLocation(){
 };
 
 function reportPosition(position) {
+
+  //check if data exists
+
   let key = `openWeather-jc`;
 	const localValue = localStorage.getItem(key);
 	if (!localValue) {
+    //if data doesn't exist, fetch
 		fetchData(position);
 	}
   const item = JSON.parse(localValue);
 
-	const now = new Date();
+  //if data is +30mins old, remove old data, fetch
+  const now = new Date();
 	if (now.getTime() > item['expiry']) {
 		localStorage.removeItem(key);
 		fetchData(position);
-	}
+  }
+  //if data is present && >30mins old, build data from storage
 	buildData(item.value);
 }
 
@@ -56,7 +62,7 @@ function fetchData(position) {
       let key = `openWeather-jc`;
       const ttl = 1800000 //30mins
       storeKey(key, value, ttl);
-
+      //once fetched, store into local storage
       function storeKey(key, value, ttl) {
         const now = new Date();
         const item = {
@@ -76,7 +82,7 @@ function fetchData(position) {
 }
 
 function buildData(data) {
-  // section.weather
+  // section.weather //
   let weatherHTML='';
   let weather = document.querySelector('.weather');
   weather.innerHTML = '';
@@ -87,32 +93,28 @@ function buildData(data) {
 
   weatherHTML = weatherHTML.concat(`
     <h3>Conditions</h3>
+
     <div class="container">
-    <p>
-    <img src="./../img/icons/sunrise.png" alt="sunrise icon">
-    Sunrise ${sunriseObject.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}
-    </p>
-    <p>
-    <img src="./../img/icons/sunset.png" alt="sunrise icon">
-    Sunset ${sunsetObject.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}
-    </p>
-    <p>
-    <img src="./../img/icons/wind.png" alt="wind icon">
-    Wind ${data.current['wind_speed']}km/h
-    </p>
-    <p>
-    <img src="./../img/icons/direction.png" alt="direction icon">
-    Direction ${data.current['wind_deg']}&#176;
-    </p>
-    <p>
-    <img src="./../img/icons/cloud.png" alt="cloud icon">
-    Cloud cover ${data.current.clouds}&#37;
-    </p>
+      <p>
+      <img src="./../img/icons/sunrise.png" alt="sunrise icon">Sunrise ${sunriseObject.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}
+      </p>
+      <p>
+        <img src="./../img/icons/sunset.png" alt="sunrise icon">Sunset ${sunsetObject.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}
+      </p>
+      <p>
+        <img src="./../img/icons/wind.png" alt="wind icon">Wind ${data.current['wind_speed']}km/h
+      </p>
+      <p>
+        <img src="./../img/icons/direction.png" alt="direction icon">Direction ${data.current['wind_deg']}&#176;
+      </p>
+      <p>
+        <img src="./../img/icons/cloud.png" alt="cloud icon">Cloud cover ${data.current.clouds}&#37;
+      </p>
     </div>
   `);
 
 
-  // section.temperature
+  // section.temperature //
   let temperatureHTML='';
   let temperature = document.querySelector('.temperature');
   temperature.innerHTML='';
@@ -124,6 +126,7 @@ function buildData(data) {
   temperatureHTML = temperatureHTML.concat(`
     <h2>Weather</h2>
     <div class="container">
+
     <div class="tempTop">
       <img src="./../img/weatherIcons/SVG/${data.current.weather[0]['icon']}.svg" alt="weather icon">
       <p>${currentTemp}&#176;C</p>
@@ -131,14 +134,14 @@ function buildData(data) {
     </div>
 
     <div class="tempBot">
-      
-      <p>${data.current.weather[0]['description']}</p>
+    <p>${data.current.weather[0]['description']}</p>
     </div>
+
     </div>
   `);
 
 
-  // section.stats
+  // section.stats //
   let statsHTML='';
   let stats = document.querySelector('.stats');
   stats.innerHTML='';
@@ -149,6 +152,7 @@ function buildData(data) {
   statsHTML = statsHTML.concat(`
     <h3>Stats</h3>
     <div class="container">
+
     <p><img src="./../img/icons/pressure.png" alt="pressure icon">
     Pressure ${data.current.pressure}mb</p>
     <p><img src="./../img/icons/humidity.png" alt="humidity icon">
@@ -159,6 +163,7 @@ function buildData(data) {
     Uvi ${data.current.uvi}</p>
     <p><img src="./../img/icons/visibility.png" alt="visibility icon">
     Visibility ${data.current.visibility} Ft.</p>
+
     </div>
   `)
 
@@ -195,13 +200,13 @@ function buildData(data) {
     
   // }
 
-  //appending data
+  // //  appending data  //  //
   weather.innerHTML = weatherHTML;
   temperature.innerHTML = temperatureHTML;
   stats.innerHTML = statsHTML;
   hourly.innerHTML = hourlyHTML;
 
-  //done loading animation
+  // //  done loading animation, display data  //  //
   document.querySelector('#loaderIcon').classList.remove('active');
   let mainWeather = document.querySelector('#mainWeather');
   mainWeather.classList.add('loaded');
