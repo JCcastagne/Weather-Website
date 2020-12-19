@@ -170,35 +170,31 @@ function buildData(data) {
 
   // section.hourly
   let hourlyHTML='';
-  let hourly = document.querySelector('.hourly');
+  let hourly = document.querySelector('#hourly');
   hourly.innerHTML='';
 
   //round temperatures
   // let dewPoint = Math.round((data.current['dew_point'])*1)/1;
+
   let currentTime = new Date().getHours();
 
-  // data.hourly.forEach((hour, i)=>{
-    
-  // })
+  //console.dir(data.hourly[0]['weather']['0']['icon'])
 
-  // console.dir(data.hourly[0])
-
-  // for (let i = 0; i < 11; i++) {
-  //   hourlyHTML = hourlyHTML.concat(`
-  //   <h4>${(currentTime)+i}:00</h4>
-  //   <div class="container">
-  //   <img src="./../img/weatherIcons/SVG/${data.hourly.weather[0][icon]}.svg" alt="weather icon for hour ${currentTime}">
-  //   <p></p>
-  //   <p></p>
-  //   <p></p>
-  //   <p></p>
-  //   <p></p>
-  //   <p></p>
-  //   <p></p>
-  //   </div>
-  // `)
-    
-  // }
+  for (let i = 0; i < 12; i++) {
+    hourlyHTML = hourlyHTML.concat(`
+      <div class="container">
+      <h4>${(currentTime)+i}:00</h4>
+      <img src="./../img/weatherIcons/SVG/${data.hourly[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${currentTime}">
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      </div>
+    `)
+  }
 
   // //  appending data  //  //
   weather.innerHTML = weatherHTML;
@@ -210,6 +206,9 @@ function buildData(data) {
   document.querySelector('#loaderIcon').classList.remove('active');
   let mainWeather = document.querySelector('#mainWeather');
   mainWeather.classList.add('loaded');
+  //ADD STAGGER ON ANIMATIONS AFTER DONE CSS
+  let hourlySection = document.querySelector('#hourly');
+  hourlySection.classList.add('loaded');
 }
 
 function gpsError(error){   

@@ -280,6 +280,47 @@ main{
 
 /** weather^**/
 
+
+/** hourly **/
+
+#hourly.loaded{
+  animation: slideIn 0.9s cubic-bezier(.51,.01,.44,.98) forwards;
+}
+
+#hourly{
+  position: relative;
+  margin: 0 -2em;
+  padding: 2em;
+  transform: translateY(50vw);
+  opacity: 0%;
+
+  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  font-size: 1.2em;
+
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+#hourly .container{
+  transform: translateX(1230px);
+  display: flex;
+  flex-direction: column;
+  border-radius: 12.5px;
+  background: linear-gradient(-45deg, rgba(0,0,0,0.22), rgba(255,255,255,0.25));
+  box-shadow: 
+    12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+    -8px -8px 12px 0 rgba(255, 255, 255, 0.25);
+  padding: 1em;
+  min-width: 247px;
+  margin: 0 1em;
+}
+
+/** hourly^ **/
+
+
+
 /** footer **/
 
 footer{
@@ -329,6 +370,8 @@ footer>p{
 
 
 /** footer^**/
+
+
 
 /** animations **/
 
