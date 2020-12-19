@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", getLocation);
 document.body.addEventListener("click", getLocation);
 
 function getLocation(){
-  if( navigator.geolocation ){ 
-    //code goes here to find position
+  if(navigator.geolocation){ 
+    //find position
     let to = 1000 * 30;  //1000 times 30 = 30 seconds
     let max = 1000 * 30 * 30;  //1000 * 30 * 30 = 1 hour
     var params = {enableHighAccuracy: false, timeout:to, maximumAge:max};
@@ -14,22 +14,30 @@ function getLocation(){
   }
 };
 
-function reportPosition(position){
+function reportPosition(position) {
+  let key = `openWeather-jc`;
+	const localValue = localStorage.getItem(key);
+	if (!localValue) {
+		fetchData(position);
+	}
+  const item = JSON.parse(localValue);
 
-  //var output = document.querySelector("#output");
+	const now = new Date();
+	if (now.getTime() > item['expiry']) {
+		localStorage.removeItem(key);
+		fetchData(position);
+	}
+	buildData(item.value);
+}
 
+function fetchData(position) {
+  
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
   let API = 'e78f8841cd9c4c49b05e8cf384ff8db0';
   let units = 'metric';
-
   let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${API}&units=${units}`;
 
-
-  let timeStamp = Date.now();
-  let key = `ow-jc-`;
-  
-  
   fetch(url)
     .then((resp)=>{
       if(resp.ok){
@@ -43,22 +51,31 @@ function reportPosition(position){
       }
     })
     .then((data)=>{
+      //store data to local storage
+      let value = data;
+      let key = `openWeather-jc`;
+      const ttl = 1800000 //30mins
+      storeKey(key, value, ttl);
 
-      if(data){buildFetchData(data)}
-
-      
+      function storeKey(key, value, ttl) {
+        const now = new Date();
+        const item = {
+          value: value,
+          expiry: now.getTime() + ttl,
+        }
+        localStorage.setItem(key, JSON.stringify(item));
+      }
+      buildData(data);
     })
     .catch((err)=> {
       //err is the Error object
       //This catch method runs if there is an error anywhere in the process.
       console.error(err);
       //document.querySelector('main').innerHTML += '<p>Unable to fetch<p>'
-    });
-
-
+    });  
 }
 
-function buildFetchData(data) {
+function buildData(data) {
   // section.weather
   let weatherHTML='';
   let weather = document.querySelector('.weather');
@@ -186,13 +203,8 @@ function buildFetchData(data) {
 
   //done loading animation
   document.querySelector('#loaderIcon').classList.remove('active');
-
   let mainWeather = document.querySelector('#mainWeather');
   mainWeather.classList.add('loaded');
-}
-
-function buildStorageData(data) {
-  
 }
 
 function gpsError(error){   
