@@ -150,15 +150,17 @@ header h1:nth-child(2){
 /** weather **/
 
 main.loaded{
-  animation: slideIn 0.9s ease-in-out forwards;
+  animation: slideIn 0.9s cubic-bezier(.51,.01,.44,.98) forwards;
 }
 
 main{
   position: relative;
-  transform: translateX(100vw);
+  transform: translateY(50vw);
+  opacity: 0%;
+
   justify-content: center;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 1.5fr 1fr;
   grid-template-areas: "weather" "temperature" "stats";
   font-size: 1.2em;
 }
@@ -172,12 +174,12 @@ main{
     12px 12px 16px 0 rgba(0, 0, 0, 0.25),
     -8px -8px 12px 0 rgba(255, 255, 255, 0.25);
   padding: 1em;
-  transition: all linear 1s;
 }
 
 .weather{
   grid-area: "weather";
   margin-right: 1em;
+  min-width: 247px;
 }
 
 .temperature{
@@ -186,11 +188,13 @@ main{
   align-items: center;
   text-align: center;
   justify-content: center;
+  min-width: 247px;
 }
 
 .stats{
   grid-area: "stats";
   margin-left: 1em;
+  min-width: 247px;
 }
 
 .temperature img{
@@ -199,18 +203,27 @@ main{
   background: linear-gradient(170deg, var(--white4) 0%, var(--white5) 100%);
   border-radius: 5%;
   box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.2), -8px -8px 16px 0 rgba(255, 255, 255, 0.4);
+
+  width: 130%;
+  transform: translateX(-11%);
 }
 
 .weather h3,
 .stats h3{
+  line-height: 1.8em;
   font-size: var(--three);
-  padding: 0.4em 0 0.25em;
   text-align: center;
+}
+
+.weather img, .stats img{
+  width: 30px;
+  margin: 0 0.4em;
+  transform: translateY(0.27em);
 }
 
 .temperature h2{
   font-size: var(--five);
-  margin-bottom: 0.5em;
+  margin-bottom: 0.25em;
 }
 
 .weather h3,
@@ -230,29 +243,29 @@ main{
 }
 
 .tempTop p:nth-child(2){
-  margin-top: 0.5em;
   font-size: var(--four);
-  margin-right: 0.5em;
 }
 
 .tempTop p:nth-child(3){
-  /* margin-top: 1.45em; */
-  font-size: var(--two);
+  font-size: var(--one);
 }
 
 .tempBot{
-  margin-bottom: 0.5em;
-  font-weight: 200;
-  font-size: var(--two);
+  font-weight: 300;
+  font-size: var(--one);
 }
 
 .container p{
-  padding: 0.25em 0;
+  padding: 0.5em 0;
+}
+
+.temperature .container p{
+  padding: 0.125em;
 }
 
 .weather::after, .stats::after{
   position: relative;
-  bottom: -3em;
+  bottom: -1.5em;
   content: "";
   background-color: var(--blue);
   height: 5px;
@@ -321,7 +334,8 @@ footer>p{
 
 @keyframes slideIn{
   to{
-    transform: translateX(0vw);
+    transform: translateY(0vh);
+    opacity: 100%;
   }
 }
 

@@ -20,13 +20,15 @@ function reportPosition(position){
 
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
-  //let app_id = 'ef35be60';
   let API = 'e78f8841cd9c4c49b05e8cf384ff8db0';
   let units = 'metric';
-  //let to = Math.round(Math.random()*(4-2)+2);
-  //let ts = Date.now();
 
   let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${API}&units=${units}`;
+
+
+  let timeStamp = Date.now();
+  let key = `ow-jc-`;
+  
   
   fetch(url)
     .then((resp)=>{
@@ -42,74 +44,7 @@ function reportPosition(position){
     })
     .then((data)=>{
 
-      // section.weather
-      let weatherHTML='';
-      let weather = document.querySelector('.weather');
-      weather.innerHTML = '';
-
-      //turn timestamps to hours:
-      let sunriseObject = new Date((data.current.sunrise)*1000);
-      let sunsetObject = new Date((data.current.sunset)*1000);
-
-      weatherHTML = weatherHTML.concat(`
-        <h3>Conditions</h3>
-        <div class="container">
-        <p>Sunrise: ${sunriseObject.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}</p>
-        <p>Sunset: ${sunsetObject.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}</p>
-        <p>Wind speed: ${data.current['wind_speed']}km/h</p>
-        <p>Wind direction: ${data.current['wind_deg']}&#176;</p>
-        <p>Cloud cover: ${data.current.clouds}&#37;</p>
-        </div>
-      `);
-
-
-      // section.temperature
-      let temperatureHTML='';
-      let temperature = document.querySelector('.temperature');
-      temperature.innerHTML='';
-      temperatureHTML = temperatureHTML.concat(`
-        <h2>Weather</h2>
-        <div class="container">
-        <div class="tempTop">
-          <img src="./../img/weatherIcons/SVG/${data.current.weather[0]['icon']}.svg" alt="weather icon">
-          <p>${data.current.temp}&#176;C</p>
-          <p>feels like ${data.current['feels_like']}&#176;C</p>
-        </div>
-
-        <div class="tempBot">
-          
-          <p>${data.current.weather[0]['description']}</p>
-        </div>
-        </div>
-      `);
-
-
-      // section.stats
-      let statsHTML='';
-      let stats = document.querySelector('.stats');
-      stats.innerHTML='';
-      statsHTML = statsHTML.concat(`
-        <h3>Stats</h3>
-        <div class="container">
-        <p>Pressure: ${data.current.pressure}mb</p>
-        <p>Humidity: ${data.current.humidity}&#37;</p>
-        <p>Dew Point: ${data.current['dew_point']}&#176;C</p>
-        <p>Uvi: ${data.current.uvi}</p>
-        <p>Visibility: ${data.current.visibility} Ft.</p>
-        </div>
-      `)
-
-
-      //appending data
-      weather.innerHTML = weatherHTML;
-      temperature.innerHTML = temperatureHTML;
-      stats.innerHTML = statsHTML;
-
-      //done loading animation
-      document.querySelector('#loaderIcon').classList.remove('active');
-
-      let mainWeather = document.querySelector('#mainWeather');
-      mainWeather.classList.add('loaded');
+      if(data){buildFetchData(data)}
 
       
     })
@@ -123,6 +58,143 @@ function reportPosition(position){
 
 }
 
+function buildFetchData(data) {
+  // section.weather
+  let weatherHTML='';
+  let weather = document.querySelector('.weather');
+  weather.innerHTML = '';
+
+  //turn timestamps to hours:
+  let sunriseObject = new Date((data.current.sunrise)*1000);
+  let sunsetObject = new Date((data.current.sunset)*1000);
+
+  weatherHTML = weatherHTML.concat(`
+    <h3>Conditions</h3>
+    <div class="container">
+    <p>
+    <img src="./../img/icons/sunrise.png" alt="sunrise icon">
+    Sunrise ${sunriseObject.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}
+    </p>
+    <p>
+    <img src="./../img/icons/sunset.png" alt="sunrise icon">
+    Sunset ${sunsetObject.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}
+    </p>
+    <p>
+    <img src="./../img/icons/wind.png" alt="wind icon">
+    Wind ${data.current['wind_speed']}km/h
+    </p>
+    <p>
+    <img src="./../img/icons/direction.png" alt="direction icon">
+    Direction ${data.current['wind_deg']}&#176;
+    </p>
+    <p>
+    <img src="./../img/icons/cloud.png" alt="cloud icon">
+    Cloud cover ${data.current.clouds}&#37;
+    </p>
+    </div>
+  `);
+
+
+  // section.temperature
+  let temperatureHTML='';
+  let temperature = document.querySelector('.temperature');
+  temperature.innerHTML='';
+  
+  //round temperatures
+  let currentTemp = Math.round((data.current.temp)*10)/10;
+  let feelsLike = Math.round((data.current['feels_like'])*10)/10;
+
+  temperatureHTML = temperatureHTML.concat(`
+    <h2>Weather</h2>
+    <div class="container">
+    <div class="tempTop">
+      <img src="./../img/weatherIcons/SVG/${data.current.weather[0]['icon']}.svg" alt="weather icon">
+      <p>${currentTemp}&#176;C</p>
+      <p>feels like ${feelsLike}&#176;C</p>
+    </div>
+
+    <div class="tempBot">
+      
+      <p>${data.current.weather[0]['description']}</p>
+    </div>
+    </div>
+  `);
+
+
+  // section.stats
+  let statsHTML='';
+  let stats = document.querySelector('.stats');
+  stats.innerHTML='';
+
+  //round temperatures
+  let dewPoint = Math.round((data.current['dew_point'])*1)/1;
+
+  statsHTML = statsHTML.concat(`
+    <h3>Stats</h3>
+    <div class="container">
+    <p><img src="./../img/icons/pressure.png" alt="pressure icon">
+    Pressure ${data.current.pressure}mb</p>
+    <p><img src="./../img/icons/humidity.png" alt="humidity icon">
+    Humidity ${data.current.humidity}&#37;</p>
+    <p><img src="./../img/icons/dewpoint.png" alt="dew point icon">
+    Dew ${dewPoint}&#176;C</p>
+    <p><img src="./../img/icons/uvi.png" alt="uvi icon">
+    Uvi ${data.current.uvi}</p>
+    <p><img src="./../img/icons/visibility.png" alt="visibility icon">
+    Visibility ${data.current.visibility} Ft.</p>
+    </div>
+  `)
+
+
+  // section.hourly
+  let hourlyHTML='';
+  let hourly = document.querySelector('.hourly');
+  hourly.innerHTML='';
+
+  //round temperatures
+  // let dewPoint = Math.round((data.current['dew_point'])*1)/1;
+  let currentTime = new Date().getHours();
+
+  // data.hourly.forEach((hour, i)=>{
+    
+  // })
+
+  // console.dir(data.hourly[0])
+
+  // for (let i = 0; i < 11; i++) {
+  //   hourlyHTML = hourlyHTML.concat(`
+  //   <h4>${(currentTime)+i}:00</h4>
+  //   <div class="container">
+  //   <img src="./../img/weatherIcons/SVG/${data.hourly.weather[0][icon]}.svg" alt="weather icon for hour ${currentTime}">
+  //   <p></p>
+  //   <p></p>
+  //   <p></p>
+  //   <p></p>
+  //   <p></p>
+  //   <p></p>
+  //   <p></p>
+  //   </div>
+  // `)
+    
+  // }
+
+  //appending data
+  weather.innerHTML = weatherHTML;
+  temperature.innerHTML = temperatureHTML;
+  stats.innerHTML = statsHTML;
+  hourly.innerHTML = hourlyHTML;
+
+  //done loading animation
+  document.querySelector('#loaderIcon').classList.remove('active');
+
+  let mainWeather = document.querySelector('#mainWeather');
+  mainWeather.classList.add('loaded');
+}
+
+function buildStorageData(data) {
+  
+}
+
 function gpsError(error){   
   var errors = {
     1: 'Sorry your browser did not have permissions to get your location.',
@@ -132,11 +204,5 @@ function gpsError(error){
   //   errors[1]
   alert("Error: " + errors[error.code] + "... " + error.message );
 }
-
-
-
-
-
-
 
 //OpenWeather | Created by J-C Castagne @ GitHub: https://github.com/JCcastagne
