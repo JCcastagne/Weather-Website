@@ -173,28 +173,24 @@ function buildData(data) {
   let hourly = document.querySelector('#hourly');
   hourly.innerHTML='';
 
-  //round temperatures
-  // let dewPoint = Math.round((data.current['dew_point'])*1)/1;
-
-  let currentTime = new Date().getHours();
-
-  //console.dir(data.hourly[0]['weather']['0']['icon'])
-
   for (let i = 0; i < 12; i++) {
+
+    //turn timestamps to hours
+    let hourlyTime = new Date((data.hourly[i]['dt'])*1000);
+
     hourlyHTML = hourlyHTML.concat(`
       <div class="container">
-      <h4>${(currentTime)+i}:00</h4>
-      <img src="./../img/weatherIcons/SVG/${data.hourly[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${currentTime}">
-      <p></p>
-      <p></p>
-      <p></p>
-      <p></p>
-      <p></p>
-      <p></p>
-      <p></p>
+      <h4>${hourlyTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}</h4>
+      <img src="./../img/weatherIcons/SVG/${data.hourly[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${hourlyTime}">
+      <p>Temperature ${Math.round((data.hourly[i]['temp'])*1)/1}&#176;C</p>
+      <p>${data.hourly[i]['weather'][0]['description']}</p>
+      <p>Feels like ${Math.round((data.hourly[i]['feels_like'])*1)/1}&#176;C</p>
+      <p>P.O.P. ${(data.hourly[i]['pop'])*100}&#37;</p>
       </div>
     `)
   }
+
+  
 
   // //  appending data  //  //
   weather.innerHTML = weatherHTML;

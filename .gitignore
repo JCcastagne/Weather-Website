@@ -1,5 +1,6 @@
 /proto.xd
 /onecall-json-temp.json
 *.DS_Store
+**/*.DS_Store
 /img/weatherIcons/*.ai
 /img/icons/*.ai
