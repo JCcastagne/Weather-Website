@@ -19,7 +19,7 @@ html {
   text-size-adjust: 100%;
   font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   background: var(--white5);
-  background: linear-gradient(170deg, var(--white4) 0%, var(--white5) 100%);
+  background: linear-gradient(170deg, var(--topLeft) 0%, var(--bottomRight) 100%);
   color: var(--jetBlack);
 }
 
@@ -33,6 +33,12 @@ html {
   --white4: rgb(225,225,225);
   --white5: rgb(208, 208, 208);
   --white6: rgb(145, 145, 145);
+
+  --topLeft: rgb(236,240,243);
+  --bottomRight: rgb(236,240,243);
+  --flatBG: rgb(227,230,236);
+  --whiteShadow: rgb(255, 255, 255);
+  --blackShadow: rgb(209, 217, 230);
 
   /*accents*/
   --darkBlue: #002447;
@@ -83,7 +89,7 @@ header h1:nth-child(1){
 }
 
 header h1:nth-child(2){
-  background: linear-gradient(170deg, var(--blue) 0%, var(--white6) 100%);
+  background: linear-gradient(170deg, var(--blue) 0%, var(--white5) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -106,19 +112,19 @@ header h1:nth-child(2){
 .location .currentLocation{
   display: flex;
   margin-right: 1em;
-  box-shadow: inset 8px 8px 16px 0 rgba(0, 0, 0, 0.2), inset -8px -8px 16px 0 rgba(255, 255, 255, 0.4);
+  box-shadow: inset 8px 8px 16px 0 var(--blackShadow), inset -8px -8px 16px 0 var(--whiteShadow);
 }
 
 .location .refresh{
   display: flex;
   flex-direction: row;
-  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25), -8px -8px 12px 0 rgba(255, 255, 255, 0.25);
+  box-shadow: 12px 12px 16px 0 var(--blackShadow), -8px -8px 12px 0 var(--whiteShadow);
 
   transition: all 0.3s ease-in-out;
 }
 .location .refresh:hover{
   background: none;
-  box-shadow: inset 8px 8px 16px 0 rgba(0, 0, 0, 0.2), inset -8px -8px 16px 0 rgba(255, 255, 255, 0.4);
+  box-shadow: inset 8px 8px 16px 0 var(--blackShadow), inset -8px -8px 16px 0 var(--whiteShadow);
 }
 
 .location .currentLocation img{
@@ -142,7 +148,7 @@ header h1:nth-child(2){
   height: 7.5px;
   background: rgb(0,36,71);
   background: linear-gradient(90deg, rgba(0,36,71,1) 0%, rgba(83,211,209,1) 20%, rgba(254,178,73,1) 40%, rgba(83,211,209,1) 60%, rgba(0,36,71,1) 80%, rgba(254,178,73,1) 100%);
-  box-shadow: inset 8px 8px 16px 0 rgba(0, 0, 0, 0.2), inset -8px -8px 16px 0 rgba(255, 255, 255, 0.4);
+  box-shadow: inset 8px 8px 16px 0 rgb(209, 217, 230, 0.5), inset -8px -8px 16px 0 rgb(255, 255, 255, 0.5);
 }
 
 /** header^**/
@@ -169,10 +175,10 @@ main{
   display: flex;
   flex-direction: column;
   border-radius: 12.5px;
-  background: linear-gradient(-45deg, rgba(0,0,0,0.22), rgba(255,255,255,0.25));
+  /* background: linear-gradient(-45deg, rgba(0,0,0,0.22), rgba(255,255,255,0.25)); */
   box-shadow: 
-    12px 12px 16px 0 rgba(0, 0, 0, 0.25),
-    -8px -8px 12px 0 rgba(255, 255, 255, 0.25);
+    12px 12px 16px 0 var(--blackShadow),
+    -8px -8px 12px 0 var(--whiteShadow);
   padding: 1em;
 }
 
@@ -201,10 +207,12 @@ main{
 
 .temperature img{
   display: block;
-  background: var(--white5);
-  background: linear-gradient(170deg, var(--white4) 0%, var(--white5) 100%);
+  /* background: var(--white5);
+  background: linear-gradient(170deg, var(--white4) 0%, var(--white5) 100%); */
   border-radius: 12.5px;
-  box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.2), -8px -8px 16px 0 rgba(255, 255, 255, 0.4);
+  box-shadow: 
+    12px 12px 16px 0 var(--blackShadow),
+    -8px -8px 12px 0 var(--whiteShadow);
 
   width: 130%;
   transform: translateX(-11%);
@@ -274,8 +282,8 @@ main{
   width: 100%;
   border-radius: 12.5px;
   box-shadow: 
-    6px 6px 8px 0 rgba(0, 0, 0, 0.25),
-    -4px -4px 6px 0 rgba(255, 255, 255, 0.25);
+    6px 6px 8px 0 var(--blackShadow),
+    -4px -4px 6px 0 var(--whiteShadow);
 }
 
 
@@ -309,7 +317,7 @@ main{
   -webkit-overflow-scrolling: touch;
 
   border-radius: 12.5px;
-  box-shadow: inset 8px 8px 16px 0 rgba(0, 0, 0, 0.2), inset -8px -8px 16px 0 rgba(255, 255, 255, 0.4);
+  box-shadow: inset 8px 8px 16px 0 var(--blackShadow), inset -8px -8px 16px 0 var(--whiteShadow);
 }
 
 ::-webkit-scrollbar{
@@ -322,15 +330,13 @@ main{
   flex-direction: column;
   border-radius: 12.5px;
   /* background: linear-gradient(-45deg, rgba(0,0,0,0.22), rgba(255,255,255,0.25)); */
-  box-shadow: 
-    12px 12px 16px 0 rgba(0, 0, 0, 0.25),
-    -8px -8px 12px 0 rgba(255, 255, 255, 0.25);
+  box-shadow:  8px 8px 16px 0 var(--blackShadow),  -8px -8px 16px 0 var(--whiteShadow);
   padding: 1em;
   min-width: 247px;
   margin: 0 1em;
 }
 
-#hourly .container h4{
+#hourly .container span{
   font-size: var(--two);
   text-shadow: 6px 6px 8px rgba(0, 0, 0, 0.15),
   -4px -4px 6px rgba(255, 255, 255, 0.15);
@@ -351,8 +357,8 @@ main{
 #hourly .container img{
   border-radius: 12.5px;
   box-shadow: 
-    12px 12px 16px 0 rgba(0, 0, 0, 0.25),
-    -8px -8px 12px 0 rgba(255, 255, 255, 0.25);
+    12px 12px 16px 0 var(--blackShadow),
+    -8px -8px 12px 0 var(--whiteShadow);
   margin: 1em;
 }
 
