@@ -186,7 +186,7 @@ function buildData(data) {
       hourlyHTML = hourlyHTML.concat(`
       <div class="container">
       <span>${hourlyTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}</span>
-      <img src="./../img/weatherIcons/SVG/${data.hourly[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${hourlyTime}">
+      <img src="/../img/weatherIcons/SVG/${data.hourly[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${hourlyTime}">
       <p>Temperature ${Math.round((data.hourly[i]['temp'])*1)/1}&#176;C</p>
       <p>${data.hourly[i]['weather'][0]['description']}</p>
       <p>Feels like ${Math.round((data.hourly[i]['feels_like'])*1)/1}&#176;C</p>
@@ -198,7 +198,7 @@ function buildData(data) {
       hourlyHTML = hourlyHTML.concat(`
       <div class="container">
       <span>${hourlyTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}</span>
-      <img src="./../img/weatherIcons/SVG/${data.hourly[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${hourlyTime}">
+      <img src="/../img/weatherIcons/SVG/${data.hourly[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${hourlyTime}">
       <p>Temperature ${Math.round((data.hourly[i]['temp'])*1)/1}&#176;C</p>
       <p>${data.hourly[i]['weather'][0]['description']}</p>
       <p>Feels like ${Math.round((data.hourly[i]['feels_like'])*1)/1}&#176;C</p>
@@ -210,7 +210,7 @@ function buildData(data) {
       hourlyHTML = hourlyHTML.concat(`
       <div class="container">
       <span>${hourlyTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}</span>
-      <img src="./../img/weatherIcons/SVG/${data.hourly[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${hourlyTime}">
+      <img src="/../img/weatherIcons/SVG/${data.hourly[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${hourlyTime}">
       <p>Temperature ${Math.round((data.hourly[i]['temp'])*1)/1}&#176;C</p>
       <p>${data.hourly[i]['weather'][0]['description']}</p>
       <p>Feels like ${Math.round((data.hourly[i]['feels_like'])*1)/1}&#176;C</p>

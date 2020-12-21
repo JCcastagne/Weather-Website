@@ -46,6 +46,7 @@ html {
   --orange: #FEB249;
 
   /*font sizes*/
+  --eight: 4em;
   --seven: 3.652em;
   --six: 3.052em;
   --five: 2.441em;
@@ -80,7 +81,7 @@ header{
 }
 
 h1{
-  font-size: var(--six);
+  font-size: var(--eight);
 }
 
 header h1:nth-child(1){
