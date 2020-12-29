@@ -278,8 +278,7 @@ main{
 
 .weather::after, .stats::after{
   position: relative;
-  /* bottom: -1.5em; */
-  bottom: -1.8em;
+  margin: 1em 0;
   content: "";
   background-color: var(--blue);
   height: 5px;
@@ -298,13 +297,13 @@ main{
 /** hourly **/
 
 #hourly.loaded{
-  animation: slideIn 0.9s 0.1s cubic-bezier(.51,.01,.44,.98) forwards;
+  animation: slideIn 0.9s 0.2s cubic-bezier(.51,.01,.44,.98) forwards;
 }
 
 #hourly{
-  /* transform: translateY(50vw); */
+  position: relative;
+  transform: translateY(50vw);
   opacity: 0%;
-  /* position: relative; */
 
   margin: 2em 0em;
   padding: 1em;
@@ -327,6 +326,14 @@ main{
   display: none;
 } */
 
+#hourly.loaded{
+  animation: slideIn 0.9s 0.1s cubic-bezier(.51,.01,.44,.98) forwards;
+}
+
+#hourly{
+  opacity: 0%;
+}
+
 #hourly .container{
   transform: translateX(1280px);
   display: flex;
@@ -335,7 +342,7 @@ main{
   box-shadow:  8px 8px 16px 0 var(--blackShadow),  -8px -8px 16px 0 var(--whiteShadow);
   padding: 1em;
   /* min-width: 247px; */
-  min-width: 300px;
+  min-width: 247px;
   margin: 0 1em;
   text-align: center;
 }
@@ -382,15 +389,16 @@ main{
   box-shadow:  8px 8px 16px 0 var(--blackShadow),  -8px -8px 16px 0 var(--whiteShadow);
   border-radius: 25px;
   padding: 0.25em;
-  width: 97%;
+  width: 33%;
+  transition: width ease-in-out 0.4s 0.4s;
   /* MIN: 33% - MAX: 97% */
 }
 
 #hourly .container .graph p:nth-of-type(2n)::after{
   content: " ";
   position: absolute;
-  left: 0.8em;
-  transform: translateY(-21%);
+  left: 0.9em;
+  transform: translateY(-19%);
   height: 6%;
   width: 87%;
   box-shadow: 

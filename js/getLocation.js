@@ -257,9 +257,9 @@ function buildData(data) {
 
   // //  done loading animation, display data  //  //
   document.querySelector('#loaderIcon').classList.remove('active');
+  
   let mainWeather = document.querySelector('#mainWeather');
   mainWeather.classList.add('loaded');
-  //ADD STAGGER ON ANIMATIONS AFTER DONE CSS
   let hourlySection = document.querySelector('#hourly');
   hourlySection.classList.add('loaded');
 }
