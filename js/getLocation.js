@@ -171,12 +171,18 @@ function buildData(data) {
 
     //turn timestamps to hours
     let hourlyTime = new Date((data.hourly[i]['dt'])*1000);
-    //round percentage
+    
+    //pulling graph data from JSON and rounding numbers
+    let temp = Math.round((data.hourly[i]['temp'])*1)/1;
+    let feelsLike = Math.round((data.hourly[i]['feels_like'])*1)/1;
     let pop = Math.round((data.hourly[i]['pop'])*100);
+    //precip is per (if) case bellow
 
 
     // (if snow)
     if(data.hourly[i]['snow']){//if snow
+      let precip = data.hourly[i]['snow']['1h'];
+
       hourlyHTML = hourlyHTML.concat(`
       <div class="container">
         <h4>${hourlyTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}</h4>
@@ -185,18 +191,20 @@ function buildData(data) {
 
         <div class="graph">
             <p>Temperature </p>
-            <p>${Math.round((data.hourly[i]['temp'])*1)/1}&#176;C</p>
+            <p style="width:${(((Math.abs(temp))*64)/100)+33}%;">${temp}&#176;C</p>
             <p>Feels like </p>
-            <p>${Math.round((data.hourly[i]['feels_like'])*1)/1}&#176;C</p>
+            <p style="width:${(((Math.abs(feelsLike))*64)/100)+33}%;">${feelsLike}&#176;C</p>
             <p>P.O.P. </p>
-            <p>${pop}&#37;</p>
+            <p style="width:${(((Math.abs(pop))*64)/100)+33}%;">${pop}&#37;</p>
             <p>Snow </p>
-            <p>${data.hourly[i]['snow']['1h']}mm</p>
+            <p style="width:${((((Math.abs(precip))*10)*64)/100)+33}%;">${precip}%</p>
         </div>
         
       </div>
       `)
     }else if(data.hourly[i]['rain']){//if rain
+      let precip = data.hourly[i]['rain']['1h'];
+
       hourlyHTML = hourlyHTML.concat(`
       <div class="container">
         <h4>${hourlyTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}</h4>
@@ -205,18 +213,20 @@ function buildData(data) {
 
         <div class="graph">
             <p>Temperature </p>
-            <p>${Math.round((data.hourly[i]['temp'])*1)/1}&#176;C</p>
+            <p style="width:${(((Math.abs(temp))*64)/100)+33}%;">${temp}&#176;C</p>
             <p>Feels like </p>
-            <p>${Math.round((data.hourly[i]['feels_like'])*1)/1}&#176;C</p>
+            <p style="width:${(((Math.abs(feelsLike))*64)/100)+33}%;">${feelsLike}&#176;C</p>
             <p>P.O.P. </p>
-            <p>${pop}&#37;</p>
-            <p>Rain </p>
-            <p>${data.hourly[i]['rain']['1h']}mm</p>
+            <p style="width:${(((Math.abs(pop))*64)/100)+33}%;">${pop}&#37;</p>
+            <p>Snow </p>
+            <p style="width:${((((Math.abs(precip))*10)*64)/100)+33}%;">${precip}%</p>
         </div>
 
       </div>
       `)
     }else{//no precipitation
+      let precip = 0;
+
       hourlyHTML = hourlyHTML.concat(`
       <div class="container">
         <h4>${hourlyTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}</h4>
@@ -225,22 +235,19 @@ function buildData(data) {
 
         <div class="graph">
             <p>Temperature </p>
-            <p>${Math.round((data.hourly[i]['temp'])*1)/1}&#176;C</p>
+            <p style="width:${(((Math.abs(temp))*64)/100)+33}%;">${temp}&#176;C</p>
             <p>Feels like </p>
-            <p>${Math.round((data.hourly[i]['feels_like'])*1)/1}&#176;C</p>
+            <p style="width:${(((Math.abs(feelsLike))*64)/100)+33}%;">${feelsLike}&#176;C</p>
             <p>P.O.P. </p>
-            <p>${pop}&#37;</p>
+            <p style="width:${(((Math.abs(pop))*64)/100)+33}%;">${pop}&#37;</p>
             <p>Precip. </p>
-            <p>0 mm</p>
+            <p style="width:${((((Math.abs(precip))*10)*64)/100)+33}%;">${precip}%</p>
         </div>
 
       </div>
       `)
     }
-    
   }
-
-  
 
   // //  appending data  //  //
   weather.innerHTML = weatherHTML;
