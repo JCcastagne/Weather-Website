@@ -4,3 +4,6 @@
 **/*.DS_Store
 /img/weatherIcons/*.ai
 /img/icons/*.ai
+img/.DS_Store
+img/.DS_Store
+img/weatherIcons/.DS_Store

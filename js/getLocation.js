@@ -179,36 +179,61 @@ function buildData(data) {
     if(data.hourly[i]['snow']){//if snow
       hourlyHTML = hourlyHTML.concat(`
       <div class="container">
-      <h4>${hourlyTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}</h4>
-      <img src="/../img/weatherIcons/SVG/${data.hourly[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${hourlyTime}">
-      <span>${data.hourly[i]['weather'][0]['description']}</span>
-      <p>Temperature ${Math.round((data.hourly[i]['temp'])*1)/1}&#176;C</p>
-      <p>Feels like ${Math.round((data.hourly[i]['feels_like'])*1)/1}&#176;C</p>
-      <p>P.O.P. ${pop}&#37;</p>
-      <p>${data.hourly[i]['snow']['1h']}mm</p>
+        <h4>${hourlyTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}</h4>
+        <img src="/../img/weatherIcons/SVG/${data.hourly[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${hourlyTime}">
+        <span>${data.hourly[i]['weather'][0]['description']}</span>
+
+        <div class="graph">
+            <p>Temperature </p>
+            <p>${Math.round((data.hourly[i]['temp'])*1)/1}&#176;C</p>
+            <p>Feels like </p>
+            <p>${Math.round((data.hourly[i]['feels_like'])*1)/1}&#176;C</p>
+            <p>P.O.P. </p>
+            <p>${pop}&#37;</p>
+            <p>Snow </p>
+            <p>${data.hourly[i]['snow']['1h']}mm</p>
+        </div>
+        
       </div>
       `)
     }else if(data.hourly[i]['rain']){//if rain
       hourlyHTML = hourlyHTML.concat(`
       <div class="container">
-      <h4>${hourlyTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}</h4>
-      <img src="/../img/weatherIcons/SVG/${data.hourly[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${hourlyTime}">
-      <span>${data.hourly[i]['weather'][0]['description']}</span>
-      <p>Temperature ${Math.round((data.hourly[i]['temp'])*1)/1}&#176;C</p>
-      <p>Feels like ${Math.round((data.hourly[i]['feels_like'])*1)/1}&#176;C</p>
-      <p>P.O.P. ${pop}&#37;</p>
-      <p>${data.hourly[i]['rain']['1h']}mm</p>
+        <h4>${hourlyTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}</h4>
+        <img src="/../img/weatherIcons/SVG/${data.hourly[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${hourlyTime}">
+        <span>${data.hourly[i]['weather'][0]['description']}</span>
+
+        <div class="graph">
+            <p>Temperature </p>
+            <p>${Math.round((data.hourly[i]['temp'])*1)/1}&#176;C</p>
+            <p>Feels like </p>
+            <p>${Math.round((data.hourly[i]['feels_like'])*1)/1}&#176;C</p>
+            <p>P.O.P. </p>
+            <p>${pop}&#37;</p>
+            <p>Rain </p>
+            <p>${data.hourly[i]['rain']['1h']}mm</p>
+        </div>
+
       </div>
       `)
     }else{//no precipitation
       hourlyHTML = hourlyHTML.concat(`
       <div class="container">
-      <h4>${hourlyTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}</h4>
-      <img src="/../img/weatherIcons/SVG/${data.hourly[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${hourlyTime}">
-      <span>${data.hourly[i]['weather'][0]['description']}</span>
-      <p>Temperature ${Math.round((data.hourly[i]['temp'])*1)/1}&#176;C</p>
-      <p>Feels like ${Math.round((data.hourly[i]['feels_like'])*1)/1}&#176;C</p>
-      <p>P.O.P. ${pop}&#37;</p>
+        <h4>${hourlyTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}</h4>
+        <img src="/../img/weatherIcons/SVG/${data.hourly[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${hourlyTime}">
+        <span>${data.hourly[i]['weather'][0]['description']}</span>
+
+        <div class="graph">
+            <p>Temperature </p>
+            <p>${Math.round((data.hourly[i]['temp'])*1)/1}&#176;C</p>
+            <p>Feels like </p>
+            <p>${Math.round((data.hourly[i]['feels_like'])*1)/1}&#176;C</p>
+            <p>P.O.P. </p>
+            <p>${pop}&#37;</p>
+            <p>Precip. </p>
+            <p>0 mm</p>
+        </div>
+
       </div>
       `)
     }
