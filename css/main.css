@@ -304,10 +304,10 @@ main{
   position: relative;
   transform: translateY(50vw);
   opacity: 0%;
-
+  /* width: 90vw; */
   margin: 2em 0em;
-  padding: 1em;
-  justify-content: center;
+  padding: 1em 0.25em;
+  justify-content: start;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   font-size: 1.2em;
@@ -319,29 +319,24 @@ main{
   -webkit-overflow-scrolling: touch;
 
   border-radius: 12.5px;
-  box-shadow: inset 8px 8px 16px 0 var(--blackShadow), inset -8px -8px 16px 0 var(--whiteShadow);
+  /* box-shadow: inset 8px 8px 16px 0 var(--blackShadow), inset -8px -8px 16px 0 var(--whiteShadow); */
 }
 
-/* ::-webkit-scrollbar{
+::-webkit-scrollbar{
   display: none;
-} */
-
-#hourly.loaded{
-  animation: slideIn 0.9s 0.1s cubic-bezier(.51,.01,.44,.98) forwards;
 }
 
 #hourly{
   opacity: 0%;
+  box-shadow:  inset 8px 0px 32px -16px var(--blackShadow);
 }
 
 #hourly .container{
-  transform: translateX(1280px);
   display: flex;
   flex-direction: column;
   border-radius: 12.5px;
   box-shadow:  8px 8px 16px 0 var(--blackShadow),  -8px -8px 16px 0 var(--whiteShadow);
   padding: 1em;
-  /* min-width: 247px; */
   min-width: 247px;
   margin: 0 1em;
   text-align: center;
@@ -385,8 +380,9 @@ main{
 
 #hourly .container .graph p:nth-of-type(2n){
   text-align: center;
-  background: linear-gradient(170deg, var(--topLeft) 0%, var(--blue) 100%);
-  box-shadow:  8px 8px 16px 0 var(--blackShadow),  -8px -8px 16px 0 var(--whiteShadow);
+  /* background: linear-gradient(170deg, var(--topLeft) 0%, var(--blue) 100%); */
+  background-color: var(--lightBlue);
+  box-shadow: inset 6px 6px 16px 0 var(--blackShadow), inset -4px -4px 12px 0 var(--whiteShadow), 8px 8px 16px 0 var(--blackShadow),  -8px -8px 16px 0 var(--whiteShadow);
   border-radius: 25px;
   padding: 0.25em;
   width: 33%;
@@ -394,7 +390,7 @@ main{
   /* MIN: 33% - MAX: 97% */
 }
 
-#hourly .container .graph p:nth-of-type(2n)::after{
+/* #hourly .container .graph p:nth-of-type(2n)::after{
   content: " ";
   position: absolute;
   left: 0.9em;
@@ -406,7 +402,7 @@ main{
     inset -8px -8px 12px 0 var(--whiteShadow);
   z-index: -1;
   border-radius: 25px;
-}
+} */
 
 /** hourly^ **/
 

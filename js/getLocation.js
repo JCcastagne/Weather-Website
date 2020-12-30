@@ -186,7 +186,7 @@ function buildData(data) {
       hourlyHTML = hourlyHTML.concat(`
       <div class="container">
         <h4>${hourlyTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}</h4>
-        <img src="/../img/weatherIcons/SVG/${data.hourly[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${hourlyTime}">
+        <img src="/img/weatherIcons/SVG/${data.hourly[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${hourlyTime}">
         <span>${data.hourly[i]['weather'][0]['description']}</span>
 
         <div class="graph">
@@ -208,7 +208,7 @@ function buildData(data) {
       hourlyHTML = hourlyHTML.concat(`
       <div class="container">
         <h4>${hourlyTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}</h4>
-        <img src="/../img/weatherIcons/SVG/${data.hourly[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${hourlyTime}">
+        <img src="/img/weatherIcons/SVG/${data.hourly[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${hourlyTime}">
         <span>${data.hourly[i]['weather'][0]['description']}</span>
 
         <div class="graph">
@@ -230,7 +230,7 @@ function buildData(data) {
       hourlyHTML = hourlyHTML.concat(`
       <div class="container">
         <h4>${hourlyTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'})}</h4>
-        <img src="/../img/weatherIcons/SVG/${data.hourly[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${hourlyTime}">
+        <img src="/img/weatherIcons/SVG/${data.hourly[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${hourlyTime}">
         <span>${data.hourly[i]['weather'][0]['description']}</span>
 
         <div class="graph">
