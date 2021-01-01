@@ -210,18 +210,10 @@ main{
 
 .temperature img{
   display: block;
-  /* background: var(--white5);
-  background: linear-gradient(170deg, var(--white4) 0%, var(--white5) 100%); */
   border-radius: 12.5px;
-  box-shadow: 
-    inset 12px 12px 16px 0 var(--blackShadow),
-    inset -8px -8px 12px 0 var(--whiteShadow);
-
+  box-shadow: inset 12px 12px 16px 0 var(--blackShadow), inset -8px -8px 12px 0 var(--whiteShadow);
   width: 130%;
   transform: translateX(-11%);
-
-  background-image: url(./../img/icons/rain.gif); /*snow, rain, */
-  background-size: cover;
 }
 
 .weather h3,
@@ -294,13 +286,15 @@ main{
 /** weather^**/
 
 
-/** hourly **/
+/** hourly & daily **/
 
-#hourly.loaded{
+#hourly.loaded,
+#daily.loaded{
   animation: slideIn 0.9s 0.2s cubic-bezier(.51,.01,.44,.98) forwards;
 }
 
-#hourly{
+#hourly,
+#daily{
   position: relative;
   transform: translateY(50vw);
   opacity: 0%;
@@ -311,27 +305,21 @@ main{
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   font-size: 1.2em;
+  border-radius: 12.5px;
+  box-shadow:  inset 8px 0px 32px -16px var(--blackShadow), 0px 8px 32px -8px var(--blackShadow), inset 0px -8px 32px -8px var(--blackShadow);
 
   flex-wrap: nowrap;
   overflow-x: auto;
-  
   /*ios scrolling*/
   -webkit-overflow-scrolling: touch;
-
-  border-radius: 12.5px;
-  /* box-shadow: inset 8px 8px 16px 0 var(--blackShadow), inset -8px -8px 16px 0 var(--whiteShadow); */
 }
 
 ::-webkit-scrollbar{
   display: none;
 }
 
-#hourly{
-  opacity: 0%;
-  box-shadow:  inset 8px 0px 32px -16px var(--blackShadow);
-}
-
-#hourly .container{
+#hourly .container,
+#daily .container{
   display: flex;
   flex-direction: column;
   border-radius: 12.5px;
@@ -342,7 +330,8 @@ main{
   text-align: center;
 }
 
-#hourly .container h4{
+#hourly .container h4,
+#daily .container h4{
   font-weight: 400;
   font-size: var(--two);
   text-shadow: 6px 6px 8px rgba(0, 0, 0, 0.15),
@@ -352,7 +341,8 @@ main{
   -webkit-text-fill-color: transparent;
 }
 
-#hourly .container img{
+#hourly .container img,
+#daily .container img{
   border-radius: 12.5px;
   box-shadow: 
     inset 12px 12px 16px 0 var(--blackShadow),
@@ -360,7 +350,8 @@ main{
   margin: 1em;
 }
 
-#hourly .container span{
+#hourly .container span,
+#daily .container span{
   font-size: var(--two);
   text-shadow: 6px 6px 8px rgba(0, 0, 0, 0.15),
   -4px -4px 6px rgba(255, 255, 255, 0.15);
@@ -368,17 +359,15 @@ main{
   margin-bottom: 0.5em;
 }
 
-#hourly .container .graph{
+#hourly .container .graph,
+#daily .container .graph{
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
 }
 
-#hourly .container .graph p{
-  /* text-align: start; */
-}
-
-#hourly .container .graph p:nth-of-type(2n){
+#hourly .container .graph p:nth-of-type(2n),
+#daily .container .graph p:nth-of-type(2n){
   text-align: center;
   /* background: linear-gradient(170deg, var(--topLeft) 0%, var(--blue) 100%); */
   background-color: var(--lightBlue);
@@ -390,22 +379,7 @@ main{
   /* MIN: 33% - MAX: 97% */
 }
 
-/* #hourly .container .graph p:nth-of-type(2n)::after{
-  content: " ";
-  position: absolute;
-  left: 0.9em;
-  transform: translateY(-19%);
-  height: 6%;
-  width: 87%;
-  box-shadow: 
-    inset 12px 12px 16px 0 var(--blackShadow),
-    inset -8px -8px 12px 0 var(--whiteShadow);
-  z-index: -1;
-  border-radius: 25px;
-} */
-
-/** hourly^ **/
-
+/** hourly & daily^ **/
 
 
 /** footer **/

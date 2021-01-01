@@ -161,7 +161,7 @@ function buildData(data) {
   `)
 
 
-  // section.hourly
+  // section.hourly //
 
   let hourlyHTML='';
   let hourly = document.querySelector('#hourly');
@@ -179,7 +179,6 @@ function buildData(data) {
     //precip is per (if) case bellow
 
 
-    // (if snow)
     if(data.hourly[i]['snow']){//if snow
       let precip = data.hourly[i]['snow']['1h'];
 
@@ -249,11 +248,101 @@ function buildData(data) {
     }
   }
 
+  // section.daily //
+
+  let dailyHTML='';
+  let daily = document.querySelector('#daily');
+  daily.innerHTML='';
+
+  for (let i = 0; i < 8; i++) {
+
+    console.dir(data.daily[i]);
+
+    //turn timestamps to hours
+    let dailyTime = new Date((data.daily[i]['dt'])*1000);
+
+    //pulling graph data from JSON and rounding numbers
+    let tempMax = Math.round((data.daily[i]['temp']['max'])*1)/1;
+    let tempMin = Math.round((data.daily[i]['temp']['min'])*1)/1;
+    let feelsLike = Math.round((data.daily[i]['feels_like'])*1)/1;
+    let pop = Math.round((data.daily[i]['pop'])*100);
+
+
+    if(data.daily[i]['snow']){//if snow
+      let precip = data.daily[i]['snow'];
+
+      dailyHTML = dailyHTML.concat(`
+      <div class="container">
+        <h4>${dailyTime.toLocaleTimeString([], { month: '2-digit', day: '2-digit'})}</h4>
+        <img src="./img/weatherIcons/SVG/${data.daily[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${dailyTime.toLocaleTimeString([], { month: '2-digit', day: '2-digit'})}}">
+        <span>${data.daily[i]['weather'][0]['description']}</span>
+
+        <div class="graph">
+            <p>High </p>
+            <p style="width:${(((Math.abs(tempMax))*64)/100)+33}%;">${tempMax}&#176;C</p>
+            <p>Low </p>
+            <p style="width:${(((Math.abs(tempMin))*64)/100)+33}%;">${tempMin}&#176;C</p>
+            <p>P.O.P. </p>
+            <p style="width:${(((Math.abs(pop))*64)/100)+33}%;">${pop}&#37;</p>
+            <p>Snow </p>
+            <p style="width:${((((Math.abs(precip))*10)*64)/100)+33}%;">${precip}%</p>
+        </div>
+        
+      </div>
+      `)
+    }else if(data.daily[i]['rain']){//if rain
+      let precip = data.hourly[i]['rain']['1h'];
+
+      dailyHTML = dailyHTML.concat(`
+      <div class="container">
+        <h4>${dailyTime.toLocaleTimeString([], { month: '2-digit', day: '2-digit'})}</h4>
+        <img src="./img/weatherIcons/SVG/${data.daily[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${dailyTime.toLocaleTimeString([], { month: '2-digit', day: '2-digit'})}}">
+        <span>${data.daily[i]['weather'][0]['description']}</span>
+
+        <div class="graph">
+            <p>High </p>
+            <p style="width:${(((Math.abs(tempMax))*64)/100)+33}%;">${tempMax}&#176;C</p>
+            <p>Low </p>
+            <p style="width:${(((Math.abs(tempMin))*64)/100)+33}%;">${tempMin}&#176;C</p>
+            <p>P.O.P. </p>
+            <p style="width:${(((Math.abs(pop))*64)/100)+33}%;">${pop}&#37;</p>
+            <p>Rain </p>
+            <p style="width:${((((Math.abs(precip))*10)*64)/100)+33}%;">${precip}%</p>
+        </div>
+        
+      </div>
+      `)
+    }else{//no precipitation
+      let precip = 0;
+
+      dailyHTML = dailyHTML.concat(`
+      <div class="container">
+        <h4>${dailyTime.toLocaleTimeString([], { month: '2-digit', day: '2-digit'})}</h4>
+        <img src="./img/weatherIcons/SVG/${data.daily[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${dailyTime.toLocaleTimeString([], { month: '2-digit', day: '2-digit'})}}">
+        <span>${data.daily[i]['weather'][0]['description']}</span>
+
+        <div class="graph">
+            <p>High </p>
+            <p style="width:${(((Math.abs(tempMax))*64)/100)+33}%;">${tempMax}&#176;C</p>
+            <p>Low </p>
+            <p style="width:${(((Math.abs(tempMin))*64)/100)+33}%;">${tempMin}&#176;C</p>
+            <p>P.O.P. </p>
+            <p style="width:${(((Math.abs(pop))*64)/100)+33}%;">${pop}&#37;</p>
+            <p>Precip. </p>
+            <p style="width:${((((Math.abs(precip))*10)*64)/100)+33}%;">${precip}%</p>
+        </div>
+        
+      </div>
+      `)
+    }
+  }
+
   // //  appending data  //  //
   weather.innerHTML = weatherHTML;
   temperature.innerHTML = temperatureHTML;
   stats.innerHTML = statsHTML;
   hourly.innerHTML = hourlyHTML;
+  daily.innerHTML = dailyHTML;
 
   // //  done loading animation, display data  //  //
   document.querySelector('#loaderIcon').classList.remove('active');
@@ -262,6 +351,8 @@ function buildData(data) {
   mainWeather.classList.add('loaded');
   let hourlySection = document.querySelector('#hourly');
   hourlySection.classList.add('loaded');
+  let dailySection = document.querySelector('#daily');
+  dailySection.classList.add('loaded');
 }
 
 function gpsError(error){   
