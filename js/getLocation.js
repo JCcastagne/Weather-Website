@@ -273,8 +273,8 @@ function buildData(data) {
 
       dailyHTML = dailyHTML.concat(`
       <div class="container">
-        <h4>${dailyTime.toLocaleTimeString([], { month: '2-digit', day: '2-digit'})}</h4>
-        <img src="./img/weatherIcons/SVG/${data.daily[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${dailyTime.toLocaleTimeString([], { month: '2-digit', day: '2-digit'})}}">
+        <h4>${dailyTime.toLocaleDateString([], { month: 'short', day: '2-digit', weekday: 'short'})}</h4>
+        <img src="./img/weatherIcons/SVG/${data.daily[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${dailyTime.toLocaleDateString([], { month: 'short', day: '2-digit', weekday: 'short'})}}">
         <span>${data.daily[i]['weather'][0]['description']}</span>
 
         <div class="graph">
@@ -295,8 +295,8 @@ function buildData(data) {
 
       dailyHTML = dailyHTML.concat(`
       <div class="container">
-        <h4>${dailyTime.toLocaleTimeString([], { month: '2-digit', day: '2-digit'})}</h4>
-        <img src="./img/weatherIcons/SVG/${data.daily[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${dailyTime.toLocaleTimeString([], { month: '2-digit', day: '2-digit'})}}">
+        <h4>${dailyTime.toLocaleDateString([], { month: 'short', day: '2-digit', weekday: 'short'})}</h4>
+        <img src="./img/weatherIcons/SVG/${data.daily[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${dailyTime.toLocaleDateString([], { month: 'short', day: '2-digit', weekday: 'short'})}}">
         <span>${data.daily[i]['weather'][0]['description']}</span>
 
         <div class="graph">
@@ -317,8 +317,8 @@ function buildData(data) {
 
       dailyHTML = dailyHTML.concat(`
       <div class="container">
-        <h4>${dailyTime.toLocaleTimeString([], { month: '2-digit', day: '2-digit'})}</h4>
-        <img src="./img/weatherIcons/SVG/${data.daily[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${dailyTime.toLocaleTimeString([], { month: '2-digit', day: '2-digit'})}}">
+        <h4>${dailyTime.toLocaleDateString([], { month: 'short', day: '2-digit', weekday: 'short'})}</h4>
+        <img src="./img/weatherIcons/SVG/${data.daily[i]['weather']['0']['icon']}.svg" alt="weather icon for hour ${dailyTime.toLocaleDateString([], { month: 'short', day: '2-digit', weekday: 'short'})}}">
         <span>${data.daily[i]['weather'][0]['description']}</span>
 
         <div class="graph">

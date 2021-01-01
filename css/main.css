@@ -385,9 +385,7 @@ main{
 /** footer **/
 
 footer{
-
-  margin-top: 17em;/*delete this*/
-
+  margin-top: 4em;
   text-align: center;
   font-size: var(--one);
   display: flex;
