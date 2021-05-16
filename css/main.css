@@ -57,13 +57,25 @@ html {
   --backgroundGradient: linear-gradient(135deg, #ced8e6 0%, #00254a 100%);
   --textGradient: linear-gradient(-135deg, #ced8e6 0%, #00254a 100%);
 
+  --pageContainers: linear-gradient(135deg, #e0f0ff 0%, #446d91 100%);
+  --dateSectionGradient: linear-gradient(135deg, #85929f 0%, #14314f 100%);
+  --conditionsSectionGradient: linear-gradient(
+    110deg,
+    #8a98a8 0%,
+    #455669 100%
+  );
+  --temperatureSectionGradient: linear-gradient(
+    135deg,
+    #617489 0%,
+    #072645 100%
+  );
+  --statsSectionGradient: linear-gradient(135deg, #54687f 0%, #001a3b 100%);
+
   /*colors*/
   --lightBlue: #d1d9e6;
   --darkBlue: #002447;
 
   --text: #ffffff;
-
-  --pageContainers: #dfeeff;
 
   /*font sizes*/
   --logo: 4em;
@@ -138,35 +150,45 @@ main {
   width: 80vw;
   height: calc((calc(100vh / 9)) * 7);
   display: grid;
-  gap: 7.5px;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  border-radius: 16px;
+  gap: 7.5px;
 
-  background-color: var(--pageContainers);
+  background: var(--pageContainers);
 }
 
 #mainWeather section {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: blue;
+  border-radius: 12px;
 }
 
 .date {
   grid-column: 1 / -1;
   grid-row: 1;
+  border-radius: 12px 12px 0 0 !important;
+  gap: 0 !important;
+  background: var(--dateSectionGradient);
 }
 .weather {
   grid-column: 1;
   grid-row: 2 / -1;
+  background: var(--conditionsSectionGradient);
+  margin: 0 0 7.5px 7.5px;
 }
 .temperature {
   grid-column: 2 / -1;
   grid-row: 2 / 4;
+  background: var(--temperatureSectionGradient);
+  margin-right: 7.5px;
 }
 .stats {
   grid-column: 2 / -1;
   grid-row: 4 / -1;
+  background: var(--statsSectionGradient);
+  margin: 0 7.5px 7.5px 0;
 }
 
 .temperature img {
@@ -186,13 +208,6 @@ main {
 .weather img,
 .stats img {
   width: 30px;
-}
-
-.temperature .container p:first-of-type {
-  font-weight: 400;
-  font-size: var(--four);
-  padding-top: 0.5em;
-  padding-bottom: 0;
 }
 
 /** weather^**/

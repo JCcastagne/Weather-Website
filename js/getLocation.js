@@ -133,7 +133,6 @@ function buildData(data) {
   let feelsLike = Math.round(data.current["feels_like"] * 10) / 10;
 
   temperatureHTML = temperatureHTML.concat(`
-    <h2>Weather</h2>
     <div class="container">
       <img src="./img/weatherIcons/SVG/${data.current.weather[0]["icon"]}.svg" alt="weather icon">
       <p>${currentTemp}&#176;C</p>
