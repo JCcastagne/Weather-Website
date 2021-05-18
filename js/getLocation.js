@@ -133,11 +133,15 @@ function buildData(data) {
   let feelsLike = Math.round(data.current["feels_like"] * 10) / 10;
 
   temperatureHTML = temperatureHTML.concat(`
+  <img src="./img/weatherIcons/SVG/${
+    data.current.weather[0]["icon"]
+  }.svg" alt="weather icon">
     <div class="container">
-      <img src="./img/weatherIcons/SVG/${data.current.weather[0]["icon"]}.svg" alt="weather icon">
-      <p>${currentTemp}&#176;C</p>
-      <p>${data.current.weather[0]["description"]}</p>
-      <p>feels like ${feelsLike}&#176;C</p>
+      <p>Currently ${currentTemp}&#176;C</p>
+      <div>
+        <p>${data.current.weather[0]["description"]}</p>
+        <p>Feels like ${Math.round(feelsLike)}&#176;C</p>
+      </div>
     </div>
   `);
 
@@ -151,14 +155,13 @@ function buildData(data) {
 
   statsHTML = statsHTML.concat(`
     <h3>Stats</h3>
+
     <div class="container">
 
     <p><img src="./img/icons/pressure.svg" alt="pressure icon">
     Pressure ${data.current.pressure}mb</p>
     <p><img src="./img/icons/humidity.svg" alt="humidity icon">
     Humidity ${data.current.humidity}&#37;</p>
-    <p><img src="./img/icons/dew.svg" alt="dew point icon">
-    Dew ${dewPoint}&#176;C</p>
     <p><img src="./img/icons/uvi.svg" alt="uvi icon">
     Uvi ${data.current.uvi}</p>
     <p><img src="./img/icons/visibility.svg" alt="visibility icon">

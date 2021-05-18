@@ -42,6 +42,7 @@ html {
     var(--bottomRight) 100%
   );
   color: var(--text);
+  font-size: 1em;
 }
 
 *,
@@ -81,7 +82,7 @@ html {
   --logo: 4em;
   --headers: calc(0.666 * var(--logo));
   --subHeaders: calc(0.4125 * var(--logo));
-  --body: calc(0.25 * var(--logo));
+  --body: calc(0.33 * var(--logo));
 }
 
 /** header**/
@@ -131,7 +132,7 @@ header h1:last-of-type {
 
 /** header^**/
 
-/** weather **/
+/** weather panel **/
 
 .weatherPage {
   background: var(--backgroundGradient);
@@ -152,7 +153,7 @@ main {
 
   margin: auto;
   width: 80vw;
-  height: calc((calc(100vh / 9)) * 7);
+  height: calc((calc(100vh / 9)) * 6);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
@@ -196,12 +197,62 @@ main {
 
 /**/
 
+/*headers*/
+.weather h3,
+.stats h3 {
+  font-size: calc(var(--headers) - 66%);
+  font-weight: 300;
+}
+.temperature .container > p {
+  font-size: var(--headers);
+  font-weight: 300;
+  padding-right: var(--headers);
+}
+/*headers^*/
+
+/*bodies*/
+.weather p,
+.stats p {
+  font-size: var(--body);
+  font-weight: 200;
+}
+/*bodies^*/
+
 .weather {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+.weather h3 {
+  padding-bottom: calc(var(--body) * 0.66%);
+}
+.weather p {
+  padding: calc(var(--body) - 50%);
+  transform: translateX(6%);
+}
+.weather img {
+  transform: translateY(33%);
+  margin-right: calc(var(--body));
+}
+
 .temperature {
+  display: flex;
+  justify-content: center;
 }
+.temperature .container {
+  display: flex;
+  flex-direction: column;
+}
+.temperature .container div {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  font-size: var(--subHeaders);
+  font-weight: 200;
+  text-transform: capitalize;
+}
+
 .stats .container {
   background: black;
   display: flex;
@@ -211,16 +262,8 @@ main {
 
 .date {
   font-size: var(--headers);
+  font-weight: 300;
   padding-left: var(--body);
-}
-
-#mainWeather section h3 {
-  font-size: var(--subHeaders);
-  font-weight: 400;
-  text-align: center;
-}
-#mainWeather p {
-  font-size: var(--body);
 }
 
 .weather img,
@@ -229,13 +272,12 @@ main {
   padding-right: calc(0.5 * var(--body));
   filter: invert();
 }
-
 .temperature img {
   display: block;
   height: 250px;
 }
 
-/** weather^**/
+/** weather panel^**/
 
 /** hourly & daily **/
 
