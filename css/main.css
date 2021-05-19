@@ -88,6 +88,18 @@ html {
   --small: 1em;
 }
 
+#main {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: mandatory;
+  scroll-snap-points-y: repeat(100vh);
+  scroll-snap-type: y mandatory;
+}
+
+#main section {
+  scroll-snap-align: start;
+}
+
 /** header**/
 
 header {
@@ -96,6 +108,7 @@ header {
   display: flex;
   position: absolute;
   transform: translateX(10vw);
+  z-index: 999999;
 }
 
 header .wrapper {
@@ -156,6 +169,7 @@ main {
 
   margin: auto;
   width: 80vw;
+  max-width: 1000px;
   height: calc((calc(100vh / 9)) * 6);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -164,6 +178,7 @@ main {
   gap: 7.5px;
 
   background: var(--pageContainers);
+  box-shadow: 9px 9px 18px rgba(0, 0, 0, 0.16);
 }
 
 #mainWeather section {
@@ -306,38 +321,34 @@ main {
 
 #hourly,
 #daily {
+  background: var(--backgroundGradient);
   position: relative;
   transform: translateY(50vw);
   opacity: 0%;
-  /* width: 90vw; */
-  margin: 2em 0em;
-  padding: 1em 0.25em;
+  height: 100vh;
+  width: 100vw;
+  padding-left: 10vw;
   justify-content: start;
+  align-items: center;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  font-size: 1.2em;
-  border-radius: 12.5px;
-  box-shadow: inset 8px 0px 32px -16px var(--blackShadow),
-    0px 8px 32px -8px var(--blackShadow),
-    inset 0px -8px 32px -8px var(--blackShadow);
-
   flex-wrap: nowrap;
   overflow-x: auto;
   /*ios scrolling*/
   -webkit-overflow-scrolling: touch;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   display: none;
-}
+} */
 
 #hourly .container,
 #daily .container {
   display: flex;
   flex-direction: column;
   border-radius: 12.5px;
-  box-shadow: 8px 8px 16px 0 var(--blackShadow),
-    -8px -8px 16px 0 var(--whiteShadow);
+  background: var(--dateSectionGradient);
+  box-shadow: 9px 9px 18px rgba(0, 0, 0, 0.16);
   padding: 1em;
   min-width: 247px;
   margin: 0 1em;
@@ -346,34 +357,21 @@ main {
 
 #hourly .container h4,
 #daily .container h4 {
-  font-weight: 400;
-  font-size: var(--two);
-  text-shadow: 6px 6px 8px rgba(0, 0, 0, 0.15),
-    -4px -4px 6px rgba(255, 255, 255, 0.15);
-  background: linear-gradient(
-    170deg,
-    rgb(103, 103, 103) 0%,
-    var(--jetBlack) 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-weight: 300;
+  font-size: var(--subHeaders);
 }
 
 #hourly .container img,
 #daily .container img {
-  border-radius: 12.5px;
-  box-shadow: inset 12px 12px 16px 0 var(--blackShadow),
-    inset -8px -8px 12px 0 var(--whiteShadow);
   margin: 1em;
 }
 
 #hourly .container span,
 #daily .container span {
-  font-size: var(--two);
-  text-shadow: 6px 6px 8px rgba(0, 0, 0, 0.15),
-    -4px -4px 6px rgba(255, 255, 255, 0.15);
+  font-size: calc(var(--subHeaders) * 0.75);
   font-weight: 300;
-  margin-bottom: 0.5em;
+  text-transform: capitalize;
+  margin-bottom: var(--small);
 }
 
 #hourly .container .graph,
@@ -386,15 +384,12 @@ main {
 #hourly .container .graph p:nth-of-type(2n),
 #daily .container .graph p:nth-of-type(2n) {
   text-align: center;
-  /* background: linear-gradient(170deg, var(--topLeft) 0%, var(--blue) 100%); */
-  background-color: var(--lightBlue);
-  box-shadow: inset 6px 6px 16px 0 var(--blackShadow),
-    inset -4px -4px 12px 0 var(--whiteShadow), 8px 8px 16px 0 var(--blackShadow),
-    -8px -8px 16px 0 var(--whiteShadow);
+  background: rgba(255, 255, 255, 0.16);
   border-radius: 25px;
   padding: 0.25em;
   width: 33%;
   transition: width ease-in-out 0.4s 0.4s;
+  margin-bottom: calc(var(--small) * 0.75);
   /* MIN: 33% - MAX: 97% */
 }
 
