@@ -43,6 +43,7 @@ html {
   );
   color: var(--text);
   font-size: 1em;
+  font-weight: 400;
 }
 
 *,
@@ -79,10 +80,12 @@ html {
   --text: #ffffff;
 
   /*font sizes*/
-  --logo: 4em;
-  --headers: calc(0.666 * var(--logo));
-  --subHeaders: calc(0.4125 * var(--logo));
-  --body: calc(0.33 * var(--logo));
+
+  --logo: 3.815em;
+  --headers: 2.441em;
+  --subHeaders: 1.953em;
+  --body: 1.25em;
+  --small: 1em;
 }
 
 /** header**/
@@ -110,11 +113,11 @@ header .logo {
   transform: translateX(calc(40vw - 50%));
 }
 header .refresh {
-  font-size: var(--body);
+  font-size: var(--small);
   font-weight: 300;
 }
 .refresh img {
-  height: calc(1.5 * var(--body));
+  height: var(--body);
   padding-left: calc(0.25 * var(--body));
   filter: invert();
 }
@@ -200,13 +203,20 @@ main {
 /*headers*/
 .weather h3,
 .stats h3 {
-  font-size: calc(var(--headers) - 66%);
+  font-size: var(--subHeaders);
   font-weight: 300;
 }
+
 .temperature .container > p {
+  font-size: var(--headers) !important;
+  padding-bottom: 1.2em;
+  font-weight: 300;
+}
+
+.date {
   font-size: var(--headers);
   font-weight: 300;
-  padding-right: var(--headers);
+  padding-left: var(--body);
 }
 /*headers^*/
 
@@ -225,15 +235,14 @@ main {
   justify-content: center;
 }
 .weather h3 {
-  padding-bottom: calc(var(--body) * 0.66%);
+  padding-bottom: calc(var(--small) / 2);
 }
 .weather p {
-  padding: calc(var(--body) - 50%);
-  transform: translateX(6%);
+  padding-bottom: calc(var(--small) / 2);
 }
 .weather img {
   transform: translateY(33%);
-  margin-right: calc(var(--body));
+  margin-right: calc(var(--small) / 2);
 }
 
 .temperature {
@@ -248,22 +257,31 @@ main {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  font-size: var(--subHeaders);
   font-weight: 200;
   text-transform: capitalize;
+  transform: translateY(-1.2em);
+}
+.temperature .container p {
+  font-size: var(--body);
+  padding-right: var(--small);
 }
 
+.stats {
+  display: flex;
+  justify-content: space-evenly;
+}
 .stats .container {
-  background: black;
+  /* background: black; */
   display: flex;
   flex-direction: row;
-  max-height: 20px;
+  flex-wrap: wrap;
+  max-width: 450px;
 }
-
-.date {
-  font-size: var(--headers);
-  font-weight: 300;
-  padding-left: var(--body);
+.stats .container div:first-of-type {
+  padding-right: var(--body);
+}
+.stats img {
+  transform: translateY(33%);
 }
 
 .weather img,
@@ -274,7 +292,7 @@ main {
 }
 .temperature img {
   display: block;
-  height: 250px;
+  height: 275px;
 }
 
 /** weather panel^**/

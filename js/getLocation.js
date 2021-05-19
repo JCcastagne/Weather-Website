@@ -137,7 +137,7 @@ function buildData(data) {
     data.current.weather[0]["icon"]
   }.svg" alt="weather icon">
     <div class="container">
-      <p>Currently ${currentTemp}&#176;C</p>
+      <p>Currently ${Math.round(currentTemp)}&#176;C</p>
       <div>
         <p>${data.current.weather[0]["description"]}</p>
         <p>Feels like ${Math.round(feelsLike)}&#176;C</p>
@@ -158,14 +158,19 @@ function buildData(data) {
 
     <div class="container">
 
-    <p><img src="./img/icons/pressure.svg" alt="pressure icon">
-    Pressure ${data.current.pressure}mb</p>
-    <p><img src="./img/icons/humidity.svg" alt="humidity icon">
-    Humidity ${data.current.humidity}&#37;</p>
-    <p><img src="./img/icons/uvi.svg" alt="uvi icon">
+    <div>
+      <p><img src="./img/icons/pressure.svg" alt="pressure icon">
+      Pressure ${data.current.pressure}mb</p>
+      <p><img src="./img/icons/humidity.svg" alt="humidity icon">
+      Humidity ${data.current.humidity}&#37;</p>
+    </div>
+
+    <div>
+      <p><img src="./img/icons/uvi.svg" alt="uvi icon">
     Uvi ${data.current.uvi}</p>
-    <p><img src="./img/icons/visibility.svg" alt="visibility icon">
+      <p><img src="./img/icons/visibility.svg" alt="visibility icon">
     Visibility ${data.current.visibility} Ft.</p>
+    </div>
 
     </div>
   `);
