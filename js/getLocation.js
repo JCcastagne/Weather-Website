@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", getLocation);
-document.body.addEventListener("click", getLocation);
+document.querySelector(".refresh").addEventListener("click", getLocation);
+document.querySelector(".refresh").addEventListener("click", clickAnimation);
 
 function getLocation() {
   if (navigator.geolocation) {
@@ -481,6 +482,27 @@ function gpsError(error) {
   };
   //   errors[1]
   alert("Error: " + errors[error.code] + "... " + error.message);
+}
+
+function clickAnimation() {
+  document.body.style.opacity = "0";
+  setTimeout(() => {
+    document.body.style.opacity = "1";
+  }, 250);
+
+  let mainWeather = document.querySelector("#mainWeather");
+  let hourlySection = document.querySelector("#hourly");
+  let dailySection = document.querySelector("#daily");
+
+  mainWeather.classList.remove("loaded");
+  hourlySection.classList.remove("loaded");
+  dailySection.classList.remove("loaded");
+
+  setTimeout(() => {
+    mainWeather.classList.add("loaded");
+    hourlySection.classList.add("loaded");
+    dailySection.classList.add("loaded");
+  }, 1000);
 }
 
 //OpenWeather | Created by J-C Castagne @ GitHub: https://github.com/JCcastagne
