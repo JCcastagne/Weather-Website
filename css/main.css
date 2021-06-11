@@ -338,9 +338,9 @@ main {
   -webkit-overflow-scrolling: touch;
 }
 
-/* ::-webkit-scrollbar {
-  display: none;
-} */
+::-webkit-scrollbar {
+  /* display: none; */
+}
 
 #hourly .container,
 #daily .container {
@@ -399,7 +399,7 @@ main {
 
 footer {
   position: absolute;
-  bottom: 1em;
+  bottom: 0em;
   margin-top: 4em;
   text-align: center;
   font-size: var(--one);
@@ -408,6 +408,15 @@ footer {
   padding: 1em 0;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.5);
+}
+
+footer div {
+  display: flex;
+  flex-direction: row;
+  width: 80vw;
+  max-width: 1000px;
+  margin-left: 10vw;
+  justify-content: space-between;
 }
 
 footer a {
@@ -425,21 +434,21 @@ footer a {
 
 footer a:focus,
 footer a:hover {
-  color: var(--blue);
+  color: var(--lightBlue);
 }
 
 .credits p:nth-child(1) {
-  border-left: solid 2px var(--white4);
+  /* border-left: solid 2px var(--white4); */
 }
 .credits p:nth-child(2) {
-  padding-left: 0.6em;
-  border-left: solid 2px var(--white4);
+  /* padding-left: 0.6em; */
+  /* border-left: solid 2px var(--white4); */
 }
 
 footer > p {
   line-height: 2.25em;
-  padding-right: 0.5em;
-  border-right: solid 2px var(--white4);
+  /* padding-right: 0.5em; */
+  /* border-right: solid 2px var(--white4); */
 }
 
 /** footer^**/
