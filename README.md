@@ -2,8 +2,8 @@
 
 ## Weather Website
 
-A weather website pulling data from OpenWeather, with the neumorphism design language.
+A weather website pulling data from the OpenWeather API, with a sleek modern design.
 
-Available for non-profit use. Include the author if used.
+Code is available for non-profit use. Include the author if used.
 
 Website Preview: https://jccastagne.github.io/Weather-Website/
