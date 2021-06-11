@@ -1,12 +1,14 @@
 document.addEventListener("DOMContentLoaded", getLocation);
-document.body.addEventListener("click", getLocation);
+document.querySelector(".refresh").addEventListener("click", getLocation);
+document.querySelector(".refresh").addEventListener("click", clickAnimation);
 
 function getLocation() {
   if (navigator.geolocation) {
     //find position
-    let to = 1000 * 30; //1000 * 30 = 30sec
+    let to = 1000 * 20; //1000 * 30 = 30sec
     let max = 1000 * 30 * 30; //1000 * 30 * 30 = 1hr
     var params = { enableHighAccuracy: false, timeout: to, maximumAge: max };
+    console.log("getting location");
     navigator.geolocation.getCurrentPosition(reportPosition, gpsError, params);
   } else {
     //browser does not support geolocation api
@@ -15,25 +17,33 @@ function getLocation() {
 }
 
 function reportPosition(position) {
-  //check if data exists
+  console.log("found location");
 
-  let key = `openWeather-jc`;
+  //check if data exists
+  console.log("checking storage");
+
+  const key = `openWeather-jc`;
   const localValue = localStorage.getItem(key);
   if (!localValue) {
     //if data doesn't exist, fetch
     console.log(`No data in storage; fetching new data.`);
     fetchData(position);
   }
-  const item = JSON.parse(localValue);
 
-  //if data is +30mins old, remove old data, fetch
-  const now = new Date();
-  if (now.getTime() > item["expiry"]) {
+  //if data is more than 30mins old, remove old data, fetch
+  let item = JSON.parse(localValue);
+  let now = new Date();
+  if (now.getTime() > item.expiry || !item.expiry) {
+    console.log(`Old data in storage; fetching new data.`);
     localStorage.removeItem(key);
     fetchData(position);
+  } else {
+    //if data is present && less than 30mins old, build data from storage
+    console.log(`Data in storage; building data.`);
+
+    let item = JSON.parse(localValue);
+    buildData(item.value);
   }
-  //if data is present && >30mins old, build data from storage
-  buildData(item.value);
 }
 
 function fetchData(position) {
@@ -133,12 +143,15 @@ function buildData(data) {
   let feelsLike = Math.round(data.current["feels_like"] * 10) / 10;
 
   temperatureHTML = temperatureHTML.concat(`
-    <h2>Weather</h2>
+  <img src="./img/weatherIcons/SVG/${
+    data.current.weather[0]["icon"]
+  }.svg" alt="weather icon">
     <div class="container">
-      <img src="./img/weatherIcons/SVG/${data.current.weather[0]["icon"]}.svg" alt="weather icon">
-      <p>${currentTemp}&#176;C</p>
-      <p>${data.current.weather[0]["description"]}</p>
-      <p>feels like ${feelsLike}&#176;C</p>
+      <p>Currently ${Math.round(currentTemp)}&#176;C</p>
+      <div>
+        <p>${data.current.weather[0]["description"]}</p>
+        <p>Feels like ${Math.round(feelsLike)}&#176;C</p>
+      </div>
     </div>
   `);
 
@@ -152,18 +165,22 @@ function buildData(data) {
 
   statsHTML = statsHTML.concat(`
     <h3>Stats</h3>
+
     <div class="container">
 
-    <p><img src="./img/icons/pressure.svg" alt="pressure icon">
-    Pressure ${data.current.pressure}mb</p>
-    <p><img src="./img/icons/humidity.svg" alt="humidity icon">
-    Humidity ${data.current.humidity}&#37;</p>
-    <p><img src="./img/icons/dew.svg" alt="dew point icon">
-    Dew ${dewPoint}&#176;C</p>
-    <p><img src="./img/icons/uvi.svg" alt="uvi icon">
+    <div>
+      <p><img src="./img/icons/pressure.svg" alt="pressure icon">
+      Pressure ${data.current.pressure}mb</p>
+      <p><img src="./img/icons/humidity.svg" alt="humidity icon">
+      Humidity ${data.current.humidity}&#37;</p>
+    </div>
+
+    <div>
+      <p><img src="./img/icons/uvi.svg" alt="uvi icon">
     Uvi ${data.current.uvi}</p>
-    <p><img src="./img/icons/visibility.svg" alt="visibility icon">
+      <p><img src="./img/icons/visibility.svg" alt="visibility icon">
     Visibility ${data.current.visibility} Ft.</p>
+    </div>
 
     </div>
   `);
@@ -302,7 +319,7 @@ function buildData(data) {
   daily.innerHTML = "";
 
   for (let i = 0; i < 8; i++) {
-    console.dir(data.daily[i]);
+    //console.dir(data.daily[i]);
 
     //turn timestamps to hours
     let dailyTime = new Date(data.daily[i]["dt"] * 1000);
@@ -465,6 +482,27 @@ function gpsError(error) {
   };
   //   errors[1]
   alert("Error: " + errors[error.code] + "... " + error.message);
+}
+
+function clickAnimation() {
+  document.body.style.opacity = "0";
+  setTimeout(() => {
+    document.body.style.opacity = "1";
+  }, 250);
+
+  let mainWeather = document.querySelector("#mainWeather");
+  let hourlySection = document.querySelector("#hourly");
+  let dailySection = document.querySelector("#daily");
+
+  mainWeather.classList.remove("loaded");
+  hourlySection.classList.remove("loaded");
+  dailySection.classList.remove("loaded");
+
+  setTimeout(() => {
+    mainWeather.classList.add("loaded");
+    hourlySection.classList.add("loaded");
+    dailySection.classList.add("loaded");
+  }, 1000);
 }
 
 //OpenWeather | Created by J-C Castagne @ GitHub: https://github.com/JCcastagne

@@ -1,20 +1,34 @@
 /* Created by J-C Castagne @ GitHub: https://github.com/JCcastagne */
 
-#loaderIcon{
-  display: none;
+#loaderIcon.active,
+#loaderIcon {
+  background: none;
+  background-color: none;
+  position: absolute;
+  transform: translateX(calc(50vw - 50%)) translateY(calc(50vh - 50%));
+  z-index: 999999;
+}
+#loaderIcon.active div {
+  display: flex;
+  justify-content: center;
 }
 
-#loaderIcon.active{
+#loaderIcon {
+  display: none;
+  background: none;
+}
+
+#loaderIcon.active {
   display: flex;
   justify-content: center;
   margin: 2.5em;
 }
 
-#loaderIcon svg{
+#loaderIcon svg {
   transform: scale(0.5);
 }
 
-#loaderIcon #circles{
+#loaderIcon #circles {
   height: 300px;
   overflow: visible;
 }
@@ -26,7 +40,7 @@
 #five.animate,
 #six.animate,
 #seven.animate,
-#eight.animate{
+#eight.animate {
   animation: outer 4s infinite ease-in-out;
   stroke-width: 0px;
 }
@@ -38,32 +52,31 @@
 #fiveo.animate,
 #sixo.animate,
 #seveno.animate,
-#eighto.animate{
+#eighto.animate {
   animation: outer 4s infinite ease-in-out;
   stroke-width: 0px;
 }
 
-
-@keyframes outer{
-  0%{
+@keyframes outer {
+  0% {
     stroke-width: 0px;
   }
-  50%{
+  50% {
     stroke-width: 180px;
   }
-  100%{
+  100% {
     stroke-width: 0px;
   }
 }
 
-@keyframes inner{
-  0%{
+@keyframes inner {
+  0% {
     stroke-width: 0px;
   }
-  50%{
+  50% {
     stroke-width: 180px;
   }
-  100%{
+  100% {
     stroke-width: 0px;
   }
 }

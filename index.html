@@ -12,21 +12,26 @@
 </head>
 <body>
 
-  <header>
-    <h1>Open</h1>
-    <h1>Weather</h1>
-  </header>
+  <!-- <div class="location">
+    <img src="./img/icons/current-location-icon.png" alt="">
+    <p>Current location enabled</p>
+  </div> -->
 
-  <section class="location">
-      <div class="currentLocation">
-        <img src="./img/icons/current-location-icon.png" alt="">
-        <p>Current location enabled</p>
+  <header>
+      <div class="wrapper">
+
+        <div class="logo">
+          <h1>Open</h1>
+          <h1>Weather</h1>
+        </div>
+
+        <div class="refresh">
+          <p>Refresh</p>
+          <img src="./img/icons/refresh-icon.png" alt="">
+        </div>
+
       </div>
-      <div class="refresh">
-        <p>Refresh</p>
-        <img src="./img/icons/refresh-icon.png" alt="">
-      </div>
-  </section>
+  </header>
 
   <div id="loaderIcon" class="active">
     <div>
@@ -36,12 +41,12 @@
       <style type="text/css">
         .st0{
           fill:none;
-          stroke:#53D3D1;
+          stroke:#00254a;
           stroke-miterlimit:10;
         }
         .st1{
           fill:none;
-          stroke:rgb(236,240,243);
+          stroke:rgba(255, 255, 255, 0);
           stroke-miterlimit:10;
         }
       </style>
@@ -66,21 +71,31 @@
     </div>
   </div>
 
-  <main id="mainWeather">
+  <div id="main">
 
-    <section class="weather">
+  <section class="weatherPage">
 
-    </section>
+    <main id="mainWeather">
 
-    <section class="temperature">
+      <section class="date">
+        <p>December 20th 2020</p>
+      </section>
 
-    </section>
+      <section class="weather">
+  
+      </section>
+  
+      <section class="temperature">
+  
+      </section>
+  
+      <section class="stats">
+  
+      </section>
+  
+    </main>
 
-    <section class="stats">
-
-    </section>
-
-  </main>
+  </section>
 
   <section id="hourly">
   </section>
@@ -89,15 +104,15 @@
   </section>
 
   <footer>
-    <div class="credits">
-      <p>Data provided by <a href="http://openweathermap.org">openweathermap.org</a>
-      </p>
-      <p>Design & code by J-C Castagne at <a href="https://github.com/JCcastagne">GitHub</a>
-      </p>
-    </div>
-    <p>&#169;J-C Castagne 2020</p>
+      <div class="credits">
+        <p>Data provided by <a href="http://openweathermap.org" target="_blank">openweathermap.org</a>
+        </p>
+        <p>Design & code by &#169; <a href="https://jccastagne.github.io/Portfolio/" target="_blank">JC Castagne 2020</a>
+        </p>
+      </div>
   </footer>
 
+</div>
   <script src="./js/loader.js"></script>
   <script src="./js/getLocation.js"></script>
 </body>
