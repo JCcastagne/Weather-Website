@@ -412,11 +412,11 @@ footer {
 
 footer div {
   display: flex;
-  flex-direction: row;
-  width: 80vw;
-  max-width: 1000px;
-  margin-left: 10vw;
-  justify-content: space-between;
+  width: 100vw;
+  justify-content: center;
+}
+footer p:first-of-type {
+  margin-right: 10vw;
 }
 
 footer a {
